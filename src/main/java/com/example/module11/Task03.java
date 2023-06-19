@@ -1,9 +1,7 @@
 package com.example.module11;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Task03 {
     public static void main(String[] args) {
