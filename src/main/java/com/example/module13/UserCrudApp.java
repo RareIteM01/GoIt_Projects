@@ -218,7 +218,6 @@ public class UserCrudApp {
 
     public static void getCommentsForPostAndWriteToFile(int userId, int postId) {
         try {
-            // Получение комментариев для последнего поста пользователя
             URL postUrl = new URL(BASE_URL + "/" + userId + "/posts");
             HttpURLConnection postConnection = (HttpURLConnection) postUrl.openConnection();
             postConnection.setRequestMethod("GET");
@@ -230,7 +229,6 @@ public class UserCrudApp {
                     JsonObject lastPost = postsArray.get(postsArray.size() - 1).getAsJsonObject();
                     int lastPostId = lastPost.get("id").getAsInt();
 
-                    // Получение комментариев для последнего поста
                     URL commentsUrl = new URL(BASE_URL + "/" + lastPostId + "/comments");
                     HttpURLConnection commentsConnection = (HttpURLConnection) commentsUrl.openConnection();
                     commentsConnection.setRequestMethod("GET");
@@ -240,7 +238,6 @@ public class UserCrudApp {
                         try (BufferedReader commentsReader = new BufferedReader(new InputStreamReader(commentsConnection.getInputStream()))) {
                             JsonArray commentsArray = JsonParser.parseReader(commentsReader).getAsJsonArray();
 
-                            // Запись комментариев в файл
                             String fileName = "user-" + userId + "-post-" + postId + "-comments.json";
                             try (Writer writer = new FileWriter("src/main/resources/" + fileName)) {
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
